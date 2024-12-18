@@ -4,10 +4,10 @@ from tkinter import messagebox, ttk
 import random
 
 import os
-print(os.path.exists(r"C:\Users\OBIWUSI\Documents\ArtITS\Arithmetic_Tutoring_System.owl"))
+print(os.path.exists(r"C:\Users\SERIKI\Documents\ArtITS\Arithmetic_Tutoring_System.owl"))
 
-# Load the OWL ontology
-onto = get_ontology("C:/Users/OBIWUSI/Documents/ArtITS/Arithmetic_Tutoring_System.owl").load()
+# ontology
+onto = get_ontology("C:/Users/SERIKI/Documents/ArtITS/Arithmetic_Tutoring_System.owl").load()
 
 # Retrieve classes and properties from the ontology
 ArithmeticOperation = onto.ArithmeticOperation
@@ -23,7 +23,7 @@ hasOperand = onto.hasOperand
 hasSolution = onto.hasSolution
 providesFeedback = onto.providesFeedback
 
-# Function to generate arithmetic problems based on difficulty
+# generating arithmetic problems based on their difficulties
 def generate_problem(difficulty, operation_type):
     # Define number ranges based on difficulty
     if difficulty == 1:  # Easy: Single-digit numbers
@@ -36,7 +36,7 @@ def generate_problem(difficulty, operation_type):
         operand1_value = random.randint(100, 999)
         operand2_value = random.randint(100, 999)
 
-    # Create the problem based on selected operation
+   
     if operation_type == "Addition":
         result = operand1_value + operand2_value
     elif operation_type == "Subtraction":
@@ -51,7 +51,7 @@ def generate_problem(difficulty, operation_type):
 
     return operand1_value, operand2_value, result
 
-# Function to create a new problem
+
 def create_problem(operation_type, operand1_value, operand2_value, result):
     problem = Problem(f"{operation_type}_Problem")
     feedback = Feedback(f"{operation_type}_Feedback")
@@ -76,7 +76,7 @@ def create_problem(operation_type, operand1_value, operand2_value, result):
     problem.providesFeedback = [feedback]
     return problem, feedback
 
-# GUI Application
+
 class TutoringSystemApp:
     def __init__(self, root):
         self.root = root
@@ -94,39 +94,39 @@ class TutoringSystemApp:
         tk.Label(root, text="Operand 1:", font=("Arial", 12), bg="#f0f4f8", fg="#333333").grid(row=3, column=0, padx=10, pady=10, sticky="e")
         tk.Label(root, text="Operand 2:", font=("Arial", 12), bg="#f0f4f8", fg="#333333").grid(row=4, column=0, padx=10, pady=10, sticky="e")
 
-        # Dropdown menu for operation
+     
         self.operation_var = tk.StringVar()
         self.operation_var.set("Addition")
         self.operation_menu = ttk.Combobox(root, textvariable=self.operation_var, values=["Addition", "Subtraction", "Multiplication", "Division"], state="readonly", font=("Arial", 12))
         self.operation_menu.grid(row=1, column=1, padx=10, pady=10)
 
-        # Dropdown menu for difficulty level
+    
         self.difficulty_var = tk.IntVar()
         self.difficulty_var.set(1)
         self.difficulty_menu = ttk.Combobox(root, textvariable=self.difficulty_var, values=[1, 2, 3], state="readonly", font=("Arial", 12))
         self.difficulty_menu.grid(row=2, column=1, padx=10, pady=10)
 
-        # Entry fields for operands
+       
         self.operand1_entry = tk.Entry(root, font=("Arial", 12), bg="#ffffff", fg="#333333", relief="solid", bd=2)
         self.operand2_entry = tk.Entry(root, font=("Arial", 12), bg="#ffffff", fg="#333333", relief="solid", bd=2)
         self.operand1_entry.grid(row=3, column=1, padx=10, pady=10)
         self.operand2_entry.grid(row=4, column=1, padx=10, pady=10)
 
-        # Solve Button
+    
         self.solve_button = tk.Button(root, text="Solve", command=self.solve_problem, font=("Arial", 12), bg="#4CAF50", fg="white", width=15, relief="raised")
         self.solve_button.grid(row=5, column=0, columnspan=2, pady=20)
 
-        # Clear Fields Button
+       
         self.clear_button = tk.Button(root, text="Clear Fields", command=self.clear_fields, font=("Arial", 12), bg="#FF9800", fg="white", width=15, relief="raised")
         self.clear_button.grid(row=6, column=0, columnspan=2, pady=10)
 
-        # Feedback area
+        # Feedback 
         self.feedback_label = tk.Label(root, text="Feedback:", font=("Arial", 12, "bold"), bg="#f0f4f8", fg="#333333")
         self.feedback_label.grid(row=7, column=0, padx=10, pady=10, sticky="e")
         self.feedback_text = tk.Text(root, width=40, height=5, wrap="word", font=("Arial", 12), bg="#e8f5e9", fg="#2e7d32", relief="solid", bd=2)
         self.feedback_text.grid(row=7, column=1, padx=10, pady=10)
 
-        # Help Button
+        
         self.help_button = tk.Button(root, text="Help", command=self.show_help, font=("Arial", 12), bg="#2196F3", fg="white", width=15, relief="raised")
         self.help_button.grid(row=8, column=0, columnspan=2, pady=10)
 
@@ -163,7 +163,7 @@ class TutoringSystemApp:
                        "5. If there is any issue, please clear the fields and try again."
         messagebox.showinfo("Help", help_message)
 
-# Run the application
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = TutoringSystemApp(root)
